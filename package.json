@@ -1,13 +1,13 @@
 {
-  "name": "vscode-spotify-auth",
+  "name": "vscode-wrm-auth",
   "version": "0.0.1",
-  "description": "Spotify api auth server for vscode-spotify",
+  "description": "Auth Server for Office365",
   "main": "index.js",
   "scripts": {
     "start": "node ./index.js"
   },
-  "repository": "https://github.com/ShyykoSerhiy/vscode-spotify-auth.git",
-  "author": "shyyko.serhiy <shyyko.serhiy@gmail.com>",
+  "repository": "git@github.com:Sheel7/WebResourceManagerAuth.git",
+  "author": "sheeley7 <sheeley7@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "cookie-parser": "^1.4.3",
