@@ -41,7 +41,7 @@ app.get('/login', function (req, res) {
     ' user-read-playback-state playlist-read-private playlist-read-collaborative';
     
     
-    res.redirect('https://login.windows.net/common/oauth2/authorize' +
+    res.redirect('https://login.windows.net/common/oauth2/authorize?' +
         querystring.stringify({
             response_type: 'code',
             client_id: "64fb057e-3c0b-4fb0-8ac9-f710e529178b",
