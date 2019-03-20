@@ -30,27 +30,6 @@
             ],
             "defaultValue": "0"
         },
-        "Spotify client id": {
-            "type": "string",
-            "metadata": {
-                "description": "Spotify client id. @see https://beta.developer.spotify.com/documentation/general/guides/authorization-guide/"
-            },
-            "defaultValue": ""
-        },
-        "Spotify client secret": {
-            "type": "string",
-            "metadata": {
-                "description": "Spotify client secret. @see https://beta.developer.spotify.com/documentation/general/guides/authorization-guide/"
-            },
-            "defaultValue": ""
-        },
-        "Spotify redirect uri": {
-            "type": "string",
-            "metadata": {
-                "description": "Spotify redirect uri. @see https://beta.developer.spotify.com/documentation/general/guides/authorization-guide/"
-            },
-            "defaultValue": ""
-        },
         "Final redirect uri": {
             "type": "string",
             "metadata": {
