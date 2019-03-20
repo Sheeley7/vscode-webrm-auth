@@ -2,6 +2,7 @@ const express = require('express');
 const request = require('request');
 const querystring = require('querystring');
 const cookieParser = require('cookie-parser');
+const AuthenticationContext = require('adal-node').AuthenticationContext;
 require('dotenv').config();
 
 const client_id = process.env.SPOTIFY_CLIENT_ID;
@@ -33,7 +34,7 @@ app.use(express.static(__dirname + '/public'))
 
 app.get('/login', function (req, res) {
 
-    const state = generateRandomString(16);
+    /*const state = generateRandomString(16);
     res.cookie(stateKey, state);
 
     // your application requests authorization
@@ -49,7 +50,20 @@ app.get('/login', function (req, res) {
             resource: "https://atrio.crm.dynamics.com",
             prompt: "consent",
             state: state
-        }));
+        }));*/
+    var redirectURI = "https://webresourcemanagerauth.azurewebsites.net/";
+    var crmURL = "https://vinedev.crm.dynamics.com";
+    var clientId = "64fb057e-3c0b-4fb0-8ac9-f710e529178b";
+    var authority = "https://login.windows.net/common";
+    let authContext = new AuthenticationContext(authority);
+    authContext.acquireTokenAsync(crmURL, clientId, redirectURI, "bryan.becker@haworth.com", null).then(function(authresult){
+        console.log(authresult)
+    },
+    function(err){
+        console.log(err);
+    });
+    
+    
 });
 
 app.get('/callback', function (req, res) {
