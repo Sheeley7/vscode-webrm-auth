@@ -39,12 +39,14 @@ app.get('/login', function (req, res) {
     // your application requests authorization
     const scope = 'user-modify-playback-state user-read-private user-read-email' +
     ' user-read-playback-state playlist-read-private playlist-read-collaborative';
-    res.redirect('https://accounts.spotify.com/authorize?' +
+    
+    
+    res.redirect('https://login.microsoftonline.com/common/oauth2/authorize' +
         querystring.stringify({
             response_type: 'code',
-            client_id: client_id,
+            client_id: "2ad88395-b77d-4561-9441-d0e40824f9bc",
             scope: scope,
-            redirect_uri: redirect_uri,
+            redirect_uri: "https://www.google.com",
             state: state
         }));
 });
