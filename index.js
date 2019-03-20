@@ -47,7 +47,7 @@ app.get('/login', function (req, res) {
             response_type: 'code',
             client_id: "64fb057e-3c0b-4fb0-8ac9-f710e529178b",
             redirect_uri: "https://webresourcemanagerauth.azurewebsites.net/",
-            resource: "https://atrio.crm.dynamics.com",
+            resource: "https://vinedev.crm.dynamics.com",
             prompt: "consent",
             state: state
         }));
