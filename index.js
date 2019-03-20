@@ -52,7 +52,7 @@ app.get('/login', function (req, res) {
             state: state
         }));
     /*var redirectURI = "https://webresourcemanagerauth.azurewebsites.net/";
-    var crmURL = "https://vinedev.crm.dynamics.com";
+    var crmURL = "https://domain.crm.dynamics.com";
     var clientId = "64fb057e-3c0b-4fb0-8ac9-f710e529178b";
     var authority = "https://login.windows.net/common";
     let authContext = new AuthenticationContext(authority);
