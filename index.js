@@ -41,12 +41,12 @@ app.get('/login', function (req, res) {
     ' user-read-playback-state playlist-read-private playlist-read-collaborative';
     
     
-    res.redirect('https://login.microsoftonline.com/common/oauth2/authorize' +
+    res.redirect('https://login.windows.net/common/oauth2/authorize' +
         querystring.stringify({
             response_type: 'code',
-            client_id: "2ad88395-b77d-4561-9441-d0e40824f9bc",
-            scope: scope,
-            redirect_uri: "https://www.google.com",
+            client_id: "64fb057e-3c0b-4fb0-8ac9-f710e529178b",
+            redirect_uri: "https://vscode-wrm.azurewebsites.net/",
+            resource: "https://atrio.crm.dynamics.com/&prompt=select_account",
             state: state
         }));
 });
