@@ -45,9 +45,9 @@ app.get('/login', function (req, res) {
         querystring.stringify({
             response_type: 'code',
             client_id: "64fb057e-3c0b-4fb0-8ac9-f710e529178b",
-            redirect_uri: "https://vscode-wrm.azurewebsites.net/",
+            redirect_uri: "https://webresourcemanagerauth.azurewebsites.net/",
             resource: "https://atrio.crm.dynamics.com",
-            prompt: "select_account",
+            prompt: "consent",
             state: state
         }));
 });
