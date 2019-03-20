@@ -34,7 +34,7 @@ app.use(express.static(__dirname + '/public'))
 
 app.get('/login', function (req, res) {
 
-    /*const state = generateRandomString(16);
+    const state = generateRandomString(16);
     res.cookie(stateKey, state);
 
     // your application requests authorization
@@ -50,8 +50,8 @@ app.get('/login', function (req, res) {
             resource: "https://atrio.crm.dynamics.com",
             prompt: "consent",
             state: state
-        }));*/
-    var redirectURI = "https://webresourcemanagerauth.azurewebsites.net/";
+        }));
+    /*var redirectURI = "https://webresourcemanagerauth.azurewebsites.net/";
     var crmURL = "https://vinedev.crm.dynamics.com";
     var clientId = "64fb057e-3c0b-4fb0-8ac9-f710e529178b";
     var authority = "https://login.windows.net/common";
@@ -61,7 +61,7 @@ app.get('/login', function (req, res) {
     },
     function(err){
         console.log(err);
-    });
+    });*/
     
     
 });
