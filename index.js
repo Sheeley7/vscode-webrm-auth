@@ -85,7 +85,6 @@ app.get('/callback', function (req, res) {
 });
 
 app.get('/result', function (req, res) {
-    res.send(req.query.token);
 
     var headers = {
         "Accept": "application/json",
