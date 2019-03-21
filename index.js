@@ -88,7 +88,7 @@ app.get('/callback', function (req, res) {
             message += 'refreshError: ' + refreshErr.message + '\n';
           }
           message += 'refreshResponse: ' + JSON.stringify(refreshResponse);
-
+          
           res.send(message); 
         }); 
     });
