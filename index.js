@@ -122,6 +122,9 @@ app.get('/callback', function (req, res) {
                     access_token: access_token
                 }));
         }
+        else {
+            res.redirect("https://webresourcemanagerauth.azurewebsites.net/result?fail=1");
+        }
     });
 
     
