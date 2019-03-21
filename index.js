@@ -65,7 +65,8 @@ app.get('/callback', function (req, res) {
     var authorityUrl = authorityHostUrl + '/' + tenant;
     var redirectUri = 'https://webresourcemanagerauth.azurewebsites.net/result';
     var resource = '00000002-0000-0000-c000-000000000000';
-    
+    res.send(req.query.code);
+    /*
     var authenticationContext = new AuthenticationContext(authorityUrl);
     authenticationContext.authenticationContext.acquireTokenWithAuthorizationCode(
         req.query.code,
@@ -81,7 +82,7 @@ app.get('/callback', function (req, res) {
           errorMessage += 'response: ' + JSON.stringify(response);
           res.send(errorMessage);
         }
-    );
+    );*/
 });
 
 app.get('/result', function (req, res) {
