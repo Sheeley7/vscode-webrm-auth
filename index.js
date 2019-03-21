@@ -96,7 +96,7 @@ app.get('/callback', function (req, res) {
         request(options, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 // Print out the response body
-                res.send("GOOD TO GO");
+                res.send(JSON.stringify(response));
             }
             else {
                 res.send("BAD " + JSON.stringify(response) + JSON.stringify(error));
