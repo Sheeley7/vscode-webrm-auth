@@ -67,7 +67,7 @@ app.get('/callback', function (req, res) {
     var resource = '00000002-0000-0000-c000-000000000000';
    
     var authenticationContext = new AuthenticationContext(authorityUrl);
-    authenticationContext.authenticationContext.acquireTokenWithAuthorizationCode(
+    /*authenticationContext.authenticationContext.acquireTokenWithAuthorizationCode(
         req.query.code,
         redirectUri,
         resource,
@@ -82,6 +82,8 @@ app.get('/callback', function (req, res) {
           res.send(errorMessage);
         }
     );
+    */
+    req.send(JSON.stringify(req.query.code));
 });
 
 app.get('/result', function (req, res) {
