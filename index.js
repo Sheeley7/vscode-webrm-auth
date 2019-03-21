@@ -68,33 +68,8 @@ app.get('/callback', function (req, res) {
     
     // requesting access token from refresh token
     const refresh_token = req.query.refresh_token;
-    const authOptions = {
-        url: 'https://login.windows.net/common/oauth2/token',
-        headers: { 'Content-Type': "application/x-www-form-urlencoded" },
-        body: {
-            'grant_type': 'authorization_code',
-            'client_id': clientId,
-            'code': req.query.code,
-            'redirect_uri': redirectUri,
-            'resource': "https://atrio.crm.dynamics.com",
-            'client_secret': clientSecret
-        },
-        json: true
-    };
-
-    request.post(authOptions, function (error, response, body) {
-        if (!error && response.statusCode === 200) {
-            const access_token = body.access_token;
-          
-            res.redirect("https://webresourcemanagerauth.azurewebsites.net/result" + '?' +
-                querystring.stringify({
-                    access_token: access_token
-                }));
-        }
-        else {
-            res.redirect("https://webresourcemanagerauth.azurewebsites.net/result?"+querystring.stringify({body_value: response.statusCode}));
-        }
-    });
+    AuthenticationContext ac = new AuthenticationContext("https://login.windows.net/common");
+    res.redirect("https://webresourcemanagerauth.azurewebsites.net/result");
 
     
 });
