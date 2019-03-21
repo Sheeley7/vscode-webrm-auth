@@ -58,22 +58,21 @@ app.get('/callback', function (req, res) {
     var crmURL = "https://atrio.crm.dynamics.com";
     var clientId = "64fb057e-3c0b-4fb0-8ac9-f710e529178b";
     var authority = "https://login.windows.net/common";
-    //var clientSecret = 'yourAADIssuedClientSecretHere'
+    var clientSecret = 'eBSLWujg5gODpD8rkp+h554Av498Uy5gwkK9NouS2no='
     
     var authorityHostUrl = 'https://login.windows.net';
     var tenant = 'common';
     var authorityUrl = authorityHostUrl + '/' + tenant;
     var redirectUri = 'https://webresourcemanagerauth.azurewebsites.net/result';
     var resource = '00000002-0000-0000-c000-000000000000';
-    res.send(req.query.code);
-    /*
+   
     var authenticationContext = new AuthenticationContext(authorityUrl);
     authenticationContext.authenticationContext.acquireTokenWithAuthorizationCode(
         req.query.code,
         redirectUri,
         resource,
         clientId, 
-        null,
+        clientSecret,
         function(err, response) {
           var errorMessage = '';
           if (err) {
@@ -82,7 +81,7 @@ app.get('/callback', function (req, res) {
           errorMessage += 'response: ' + JSON.stringify(response);
           res.send(errorMessage);
         }
-    );*/
+    );
 });
 
 app.get('/result', function (req, res) {
