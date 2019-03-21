@@ -68,7 +68,7 @@ app.get('/callback', function (req, res) {
     
     // requesting access token from refresh token
     const refresh_token = req.query.refresh_token;
-    AuthenticationContext ac = new AuthenticationContext("https://login.windows.net/common");
+    var ac = new AuthenticationContext("https://login.windows.net/common");
     res.redirect("https://webresourcemanagerauth.azurewebsites.net/result");
 
     
