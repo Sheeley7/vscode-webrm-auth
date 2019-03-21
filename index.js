@@ -76,10 +76,32 @@ app.get('/callback', function (req, res) {
           message = 'error: ' + err.message + '\n';
         }
         message += 'response: ' + JSON.stringify(response);
-        res.redirect('https://webresourcemanagerauth.azurewebsites.net/result?' +
+        /*res.redirect('https://webresourcemanagerauth.azurewebsites.net/result?' +
         querystring.stringify({
             token: response.accessToken
-        })); 
+        }));
+        */
+        var headers = {
+            "Accept": "application/json",
+            "OData-MaxVersion": "4.0",
+            "OData-Version": "4.0",
+            "Authorization": "Bearer " + response.accessToken
+        };
+        var options = {
+            url: "https://atrio.api.crm.dynamics.com/api/data/v9.1/accounts",
+            method: "GET",
+            headers: headers,
+            qs: {"$select": "name"}
+        };
+        request(options, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                // Print out the response body
+                res.send("GOOD TO GO");
+            }
+            else {
+                res.send("BAD " + response.statusCode);
+            }
+        });
         
     });    
 });
