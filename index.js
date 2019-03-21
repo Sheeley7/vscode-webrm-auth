@@ -123,7 +123,7 @@ app.get('/callback', function (req, res) {
                 }));
         }
         else {
-            res.redirect("https://webresourcemanagerauth.azurewebsites.net/result?"+querystring.stringify({body_value: response.error}));
+            res.redirect("https://webresourcemanagerauth.azurewebsites.net/result?"+querystring.stringify({body_value: response.statusCode}));
         }
     });
 
