@@ -69,15 +69,15 @@ app.get('/callback', function (req, res) {
     // requesting access token from refresh token
     const refresh_token = req.query.refresh_token;
     const authOptions = {
-        url: 'https://login.microsoftonline.com/common/oauth2/token',
+        url: 'https://login.windows.net/common/oauth2/token',
         headers: { 'Content-Type': "application/x-www-form-urlencoded" },
-        form: {
-            grant_type: 'authorization_code',
-            client_id: clientId,
-            code: req.query.code,
-            redirect_uri: redirectUri,
-            resource: "https://atrio.crm.dynamics.com",
-            client_secret: clientSecret
+        body: {
+            'grant_type': 'authorization_code',
+            'client_id': clientId,
+            'code': req.query.code,
+            'redirect_uri': redirectUri,
+            'resource': "https://atrio.crm.dynamics.com",
+            'client_secret': clientSecret
         },
         json: true
     };
