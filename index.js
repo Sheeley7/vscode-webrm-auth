@@ -58,7 +58,7 @@ app.get('/callback', function (req, res) {
     var tenant = 'common';
     var authorityUrl = authorityHostUrl + '/' + tenant;
     var redirectUri = 'https://webresourcemanagerauth.azurewebsites.net/callback';
-    var resource = '00000002-0000-0000-c000-000000000000';
+    var resource = 'https://atrio.api.crm.dynamics.com';
     // your application requests refresh and access tokens
     // after checking the state parameter
 
