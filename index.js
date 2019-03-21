@@ -42,13 +42,13 @@ app.get('/login', function (req, res) {
             response_type: 'code',
             client_id: "64fb057e-3c0b-4fb0-8ac9-f710e529178b",
             redirect_uri: "https://webresourcemanagerauth.azurewebsites.net/callback",
-            resource: "https://vinedev.crm.dynamics.com",
+            resource: "https://atrio.crm.dynamics.com",
             prompt: "consent",
             state: state
         })); 
 });
 
-app.get('/callback', function (req, res) {
+app.get('/callbacktest', function (req, res) {
 
     // your application requests refresh and access tokens
     // after checking the state parameter
@@ -67,23 +67,60 @@ app.get('/callback', function (req, res) {
     var resource = '00000002-0000-0000-c000-000000000000';
    
     var authenticationContext = new AuthenticationContext(authorityUrl);
-    /*authenticationContext.authenticationContext.acquireTokenWithAuthorizationCode(
-        req.query.code,
-        redirectUri,
-        resource,
-        clientId, 
-        clientSecret,
-        function(err, response) {
-          var errorMessage = '';
-          if (err) {
-            errorMessage = 'error: ' + err.message + '\n';
-          }
-          errorMessage += 'response: ' + JSON.stringify(response);
-          res.send(errorMessage);
+    request.post(authOptions, function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+            const access_token = body.access_token;
+            res.send({
+                'access_token': access_token
+            });
         }
-    );
-    */
+    });
     req.send(JSON.stringify(req.query.code));
+});
+
+
+app.get('/callback', function (req, res) {
+    var crmURL = "https://atrio.crm.dynamics.com";
+    var clientId = "64fb057e-3c0b-4fb0-8ac9-f710e529178b";
+    var authority = "https://login.windows.net/common";
+    var clientSecret = 'eBSLWujg5gODpD8rkp+h554Av498Uy5gwkK9NouS2no='
+    
+    var authorityHostUrl = 'https://login.windows.net';
+    var tenant = 'common';
+    var authorityUrl = authorityHostUrl + '/' + tenant;
+    var redirectUri = 'https://webresourcemanagerauth.azurewebsites.net/result';
+    var resource = '00000002-0000-0000-c000-000000000000';
+    // your application requests refresh and access tokens
+    // after checking the state parameter
+
+    const code = req.query.code || null;
+    const state = req.query.state || null;
+    const storedState = req.cookies ? req.cookies[stateKey] : null;
+    
+    // requesting access token from refresh token
+    const refresh_token = req.query.refresh_token;
+    const authOptions = {
+        url: 'https://login.microsoftonline.com/common/oauth2/token',
+        headers: { 'Content-Type': "application/x-www-form-urlencoded" },
+        form: {
+            grant_type: 'authorization_code',
+            client_id: clientId,
+            code: req.query.code,
+            redirect_uri: redirectUri,
+            resource: "https://atrio.crm.dynamics.com",
+            client_secret: clientSecret
+        },
+        json: true
+    };
+
+    request.post(authOptions, function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+            const access_token = body.access_token;
+            res.send(JSON.stringify(access_token));
+        }
+    });
+
+    
 });
 
 app.get('/result', function (req, res) {
@@ -95,8 +132,8 @@ app.get('/refresh_token', function (req, res) {
     // requesting access token from refresh token
     const refresh_token = req.query.refresh_token;
     const authOptions = {
-        url: 'https://accounts.spotify.com/api/token',
-        headers: { 'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64')) },
+        url: 'https://login.microsoftonline.com/common/oauth2/token',
+        headers: { 'Content-Type': "application/x-www-form-urlencoded" },
         form: {
             grant_type: 'refresh_token',
             refresh_token: refresh_token
