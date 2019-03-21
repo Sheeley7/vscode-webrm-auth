@@ -36,34 +36,16 @@ app.get('/login', function (req, res) {
 
     const state = generateRandomString(16);
     res.cookie(stateKey, state);
-
-    // your application requests authorization
-    const scope = 'user-modify-playback-state user-read-private user-read-email' +
-    ' user-read-playback-state playlist-read-private playlist-read-collaborative';
-    
     
     res.redirect('https://login.windows.net/common/oauth2/authorize?' +
         querystring.stringify({
             response_type: 'code',
             client_id: "64fb057e-3c0b-4fb0-8ac9-f710e529178b",
-            redirect_uri: "https://webresourcemanagerauth.azurewebsites.net/",
+            redirect_uri: "https://webresourcemanagerauth.azurewebsites.net/callback",
             resource: "https://vinedev.crm.dynamics.com",
             prompt: "consent",
             state: state
-        }));
-    /*var redirectURI = "https://webresourcemanagerauth.azurewebsites.net/";
-    var crmURL = "https://domain.crm.dynamics.com";
-    var clientId = "64fb057e-3c0b-4fb0-8ac9-f710e529178b";
-    var authority = "https://login.windows.net/common";
-    let authContext = new AuthenticationContext(authority);
-    authContext.acquireTokenAsync(crmURL, clientId, redirectURI, "bryan.becker@haworth.com", null).then(function(authresult){
-        console.log(authresult)
-    },
-    function(err){
-        console.log(err);
-    });*/
-    
-    
+        })); 
 });
 
 app.get('/callback', function (req, res) {
@@ -72,50 +54,38 @@ app.get('/callback', function (req, res) {
     // after checking the state parameter
 
     const code = req.query.code || null;
-    const state = req.query.state || null;
-    const storedState = req.cookies ? req.cookies[stateKey] : null;
+    
+    var crmURL = "https://atrio.crm.dynamics.com";
+    var clientId = "64fb057e-3c0b-4fb0-8ac9-f710e529178b";
+    var authority = "https://login.windows.net/common";
+    //var clientSecret = 'yourAADIssuedClientSecretHere'
+    
+    var authorityHostUrl = 'https://login.windows.net';
+    var tenant = 'common';
+    var authorityUrl = authorityHostUrl + '/' + tenant;
+    var redirectUri = 'https://webresourcemanagerauth.azurewebsites.net/result';
+    var resource = '00000002-0000-0000-c000-000000000000';
+    
+    var authenticationContext = new AuthenticationContext(authorityUrl);
+    authenticationContext.authenticationContext.acquireTokenWithAuthorizationCode(
+        req.query.code,
+        redirectUri,
+        resource,
+        clientId, 
+        null,
+        function(err, response) {
+          var errorMessage = '';
+          if (err) {
+            errorMessage = 'error: ' + err.message + '\n';
+          }
+          errorMessage += 'response: ' + JSON.stringify(response);
+          res.send(errorMessage);
+        }
+    );
+});
 
-    if (state === null || state !== storedState) {
-        console.error('state_mismatch', state, storedState);        
-        res.redirect(final_redirect_uri + '?' +
-            querystring.stringify({
-                error: 'state_mismatch'
-            }));
-    } else {
-        res.clearCookie(stateKey);
-        const authOptions = {
-            url: 'https://accounts.spotify.com/api/token',
-            form: {
-                code: code,
-                redirect_uri: redirect_uri,
-                grant_type: 'authorization_code'
-            },
-            headers: {
-                'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
-            },
-            json: true
-        };
-
-        request.post(authOptions, function (error, response, body) {
-            if (!error && response.statusCode === 200) {
-
-                const access_token = body.access_token,
-                    refresh_token = body.refresh_token;
-
-                // we can also pass the token to the browser to make requests from there
-                res.redirect(final_redirect_uri + '?' +
-                    querystring.stringify({
-                        access_token: access_token,
-                        refresh_token: refresh_token
-                    }));
-            } else {
-                res.redirect(final_redirect_uri + '?' +
-                    querystring.stringify({
-                        error: 'invalid_token'
-                    }));
-            }
-        });
-    }
+app.get('/result', function (req, res) {
+    res.send("DONE");
 });
 
 app.get('/refresh_token', function (req, res) {
