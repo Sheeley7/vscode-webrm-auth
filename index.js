@@ -99,7 +99,7 @@ app.get('/callback', function (req, res) {
                 res.send("GOOD TO GO");
             }
             else {
-                res.send("BAD " + response.statusCode);
+                res.send("BAD " + JSON.stringify(response));
             }
         });
         
