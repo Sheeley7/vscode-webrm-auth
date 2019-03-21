@@ -85,7 +85,7 @@ app.get('/callback', function (req, res) {
                 'Accept': 'application/json',
                 'OData-MaxVersion': '4.0',
                 'OData-Version': '4.0',
-                'Authorization': 'Bearer ' + response.accessToken.
+                'Authorization': 'Bearer ' + response.accessToken
               }
             };
             request(options, function(err, res, body) {  
