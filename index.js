@@ -115,7 +115,7 @@ app.get('/result', function (req, res) {
         "Authorization": "Bearer " + req.query.token
     };
     var options = {
-        url: "https://atrio.api.crm.dynamics.com/api/data/v9.1/accounts",
+        url: "https://atrio.crm.dynamics.com/api/data/v9.1/accounts",
         method: "GET",
         headers: headers,
         qs: {"$select": "name"}
