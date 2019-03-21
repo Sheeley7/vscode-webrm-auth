@@ -116,7 +116,11 @@ app.get('/callback', function (req, res) {
     request.post(authOptions, function (error, response, body) {
         if (!error && response.statusCode === 200) {
             const access_token = body.access_token;
-            res.send(JSON.stringify(access_token));
+          
+            res.redirect("https://webresourcemanagerauth.azurewebsites.net/result" + '?' +
+                querystring.stringify({
+                    access_token: access_token
+                }));
         }
     });
 
