@@ -57,7 +57,7 @@ app.get('/callback', function (req, res) {
     var authorityHostUrl = 'https://login.windows.net';
     var tenant = 'common';
     var authorityUrl = authorityHostUrl + '/' + tenant;
-    var redirectUri = 'https://webresourcemanagerauth.azurewebsites.net/result';
+    var redirectUri = 'https://webresourcemanagerauth.azurewebsites.net/callback';
     var resource = '00000002-0000-0000-c000-000000000000';
     // your application requests refresh and access tokens
     // after checking the state parameter
