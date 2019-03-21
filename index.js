@@ -42,7 +42,7 @@ app.get('/login', function (req, res) {
             response_type: 'code',
             client_id: "64fb057e-3c0b-4fb0-8ac9-f710e529178b",
             redirect_uri: "https://webresourcemanagerauth.azurewebsites.net/callback",
-            resource: "https://atrio.crm.dynamics.com",
+            resource: "https://atrio.api.crm.dynamics.com",
             prompt: "consent",
             state: state
         })); 
@@ -99,7 +99,7 @@ app.get('/callback', function (req, res) {
                 res.send("GOOD TO GO");
             }
             else {
-                res.send("BAD " + JSON.stringify(response));
+                res.send("BAD " + JSON.stringify(response) + JSON.stringify(error));
             }
         });
         
