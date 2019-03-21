@@ -69,7 +69,30 @@ app.get('/callback', function (req, res) {
     // requesting access token from refresh token
     const refresh_token = req.query.refresh_token;
     var ac = new AuthenticationContext("https://login.windows.net/common");
-    res.redirect("https://webresourcemanagerauth.azurewebsites.net/result");
+    var authenticationContext = new AuthenticationContext(authorityUrl);
+    authenticationContext.acquireTokenWithAuthorizationCode(req.query.code, redirectUri, resource, clientId, clientSecret, function(err, response) {
+        var message = '';
+        if (err) {
+          message = 'error: ' + err.message + '\n';
+        }
+        message += 'response: ' + JSON.stringify(response);
+
+        if (err) {
+          res.send(message);
+          return;
+        }
+
+        // Later, if the access token is expired it can be refreshed.
+        authenticationContext.acquireTokenWithRefreshToken(response.refreshToken, clientId, clientSecret, resource, function(refreshErr, refreshResponse) {
+          if (refreshErr) {
+            message += 'refreshError: ' + refreshErr.message + '\n';
+          }
+          message += 'refreshResponse: ' + JSON.stringify(refreshResponse);
+
+          res.send(message); 
+        }); 
+    });
+    
 
     
 });
