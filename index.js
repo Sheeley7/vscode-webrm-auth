@@ -76,10 +76,23 @@ app.get('/callback', function (req, res) {
           message = 'error: ' + err.message + '\n';
         }
         message += 'response: ' + JSON.stringify(response);
-
+        
         if (err) {
-          res.send(message);
-          return;
+            var options = {
+            url: "https://atrio.api.crm.dynamics.com/api/data/v9.1/accounts?$select=name",
+              method: "GET",
+              headers: {
+                'Accept': 'application/json',
+                'OData-MaxVersion': '4.0',
+                'OData-Version': '4.0',
+                'Authorization': 'Bearer ' + response.accessToken.
+              }
+            };
+            request(options, function(err, res, body) {  
+              res.send(body);
+            });
+          
+            return;
         }
 
         // Later, if the access token is expired it can be refreshed.
@@ -88,8 +101,21 @@ app.get('/callback', function (req, res) {
             message += 'refreshError: ' + refreshErr.message + '\n';
           }
           message += 'refreshResponse: ' + JSON.stringify(refreshResponse);
-
-          res.send(message); 
+          var options = {
+            url: "https://atrio.api.crm.dynamics.com/api/data/v9.1/accounts?$select=name",
+              method: "GET",
+              headers: {
+                'Accept': 'application/json',
+                'OData-MaxVersion': '4.0',
+                'OData-Version': '4.0',
+                'Authorization': 'Bearer ' + response.accessToken.
+              }
+            };
+            request(options, function(err, res, body) {  
+              res.send(body);
+            });
+          
+            
         }); 
     });
     
