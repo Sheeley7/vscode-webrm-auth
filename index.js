@@ -48,37 +48,6 @@ app.get('/login', function (req, res) {
         })); 
 });
 
-app.get('/callbacktest', function (req, res) {
-
-    // your application requests refresh and access tokens
-    // after checking the state parameter
-
-    const code = req.query.code || null;
-    
-    var crmURL = "https://atrio.crm.dynamics.com";
-    var clientId = "64fb057e-3c0b-4fb0-8ac9-f710e529178b";
-    var authority = "https://login.windows.net/common";
-    var clientSecret = 'eBSLWujg5gODpD8rkp+h554Av498Uy5gwkK9NouS2no='
-    
-    var authorityHostUrl = 'https://login.windows.net';
-    var tenant = 'common';
-    var authorityUrl = authorityHostUrl + '/' + tenant;
-    var redirectUri = 'https://webresourcemanagerauth.azurewebsites.net/result';
-    var resource = '00000002-0000-0000-c000-000000000000';
-   
-    var authenticationContext = new AuthenticationContext(authorityUrl);
-    request.post(authOptions, function (error, response, body) {
-        if (!error && response.statusCode === 200) {
-            const access_token = body.access_token;
-            res.send({
-                'access_token': access_token
-            });
-        }
-    });
-    req.send(JSON.stringify(req.query.code));
-});
-
-
 app.get('/callback', function (req, res) {
     var crmURL = "https://atrio.crm.dynamics.com";
     var clientId = "64fb057e-3c0b-4fb0-8ac9-f710e529178b";
