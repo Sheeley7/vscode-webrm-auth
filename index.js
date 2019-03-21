@@ -104,7 +104,7 @@ app.get('/result', function (req, res) {
             res.send("GOOD TO GO");
         }
         else {
-            res.send("BAD");
+            res.send("BAD " + response.statusCode);
         }
     });
 });
