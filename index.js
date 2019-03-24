@@ -38,15 +38,8 @@ app.use(express.static(__dirname + '/public'))
 app.get('/login', function (req, res) {
 
     crm_url = req.query.crm_url;
-
-    var test = "code=" + "req.query.code"+ "\n";
-    test += "redirect_uri=" + redirect_uri + "code" + "\n";
-    test +=  "crm_url=" + crm_url + "\n";
-    test += "client_id=" + client_id + "\n";
-    test += "cleint_secret=" + client_secret + "\n";
-    res.send(JSON.stringify(test));
     
-    /*const state = generateRandomString(16);
+    const state = generateRandomString(16);
     res.cookie(stateKey, state);
     res.redirect(auth_url + '?' +
         querystring.stringify({
@@ -56,30 +49,27 @@ app.get('/login', function (req, res) {
             resource: crm_url,
             prompt: "consent",
             state: state
-        }));*/
+        }));
 });
 
 app.get('/code', function (req, res) {
   
     const code = req.query.code || null;
-    req.send(code);
-    /*var test = "code=" + req.query.code + "\n";
-    test += "redirect_uri=" + redirect_uri + "code" + "\n";
-    test +=  "crm_url=" + crm_url + "\n";
-    test += "client_id=" + client_id + "\n";
-    test += "cleint_secret=" + client_secret + "\n";
-    req.send(JSON.stringify(test));
-
-    //var authenticationContext = new AuthenticationContext(authority_url + "/common");
-    /*authenticationContext.acquireTokenWithAuthorizationCode(req.query.code, redirect_uri + "code", crm_url, client_id, client_secret, function(err, response) {
+    const state = req.query.state || null;
+    const storedState = req.cookies ? req.cookies[stateKey] : null;
+    
+    const refresh_token = req.query.refresh_token;
+    var authenticationContext = new AuthenticationContext(authority_url + "/common");
+    authenticationContext.acquireTokenWithAuthorizationCode(req.query.code, redirect_uri + "code", crm_url, client_id, client_secret, function(err, response) {
         var message = '';
         if (err) {
           message = 'error: ' + err.message + '\n';
         }
         message += 'response: ' + JSON.stringify(response);
-        req.send(message);
-    });*/
+        res.send(message);
+    });    
 });
+
 
 app.listen(process.env.PORT || 3000);
 
