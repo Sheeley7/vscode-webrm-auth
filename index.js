@@ -25,7 +25,7 @@ const generateRandomString = function (length) {
     return text;
 };
 
-const stateKey = 'spotify_auth_state';
+const stateKey = 'spotify_auth_state';//test
 
 const app = express();
 
