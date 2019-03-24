@@ -39,7 +39,7 @@ app.get('/login', function (req, res) {
 
     crm_url = req.query.crm_url;
 
-    var test = "code=" + req.query.code + "\n";
+    var test = "code=" + "req.query.code"+ "\n";
     test += "redirect_uri=" + redirect_uri + "code" + "\n";
     test +=  "crm_url=" + crm_url + "\n";
     test += "client_id=" + client_id + "\n";
