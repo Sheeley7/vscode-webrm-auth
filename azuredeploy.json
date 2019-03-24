@@ -30,6 +30,19 @@
             ],
             "defaultValue": "0"
         },
+        "Final redirect uri": {
+            "type": "string",
+            "metadata": {
+                "description": "Final redirect uri."
+            },
+            "defaultValue": "http://localhost:8350"
+        },
+        "repoUrl": {
+            "type": "string"
+        },
+        "branch": {
+            "type": "string"
+        },
         "Application ID": {
             "type": "string",
             "defaultValue": "",
@@ -44,19 +57,6 @@
                 "description": "Application Private Key"
             }
         },
-        "Final redirect uri": {
-            "type": "string",
-            "metadata": {
-                "description": "Final redirect uri."
-            },
-            "defaultValue": "http://localhost:8350"
-        },
-        "repoUrl": {
-            "type": "string"
-        },
-        "branch": {
-            "type": "string"
-        }
     },
     "resources": [
         {
