@@ -66,7 +66,14 @@ app.get('/code', function (req, res) {
           message = 'error: ' + err.message + '\n';
         }
         message += 'response: ' + JSON.stringify(response);
-        res.send(message);
+
+        res.redirect(final_redirect_uri + '?' +
+            querystring.stringify({
+                access_token: response.accessToken,
+                refresh_token: response.refreshToken,
+                expires_in: response.expiresIn,
+                expires_on: response.expiresOn
+            }));
     });    
 });
 
