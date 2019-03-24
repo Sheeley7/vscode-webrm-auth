@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
-const redirect_uri = "https://wrm-test1.azurewebsites.net/";//process.env.SPOTIFY_REDIRECT_URI;
+const redirect_uri = process.env.REDIRECT_URI;
 const final_redirect_uri = process.env.FINAL_REDIRECT_URI;
 const authority_url = "https://login.windows.net";
 const auth_url = authority_url + "/common/oauth2/authorize";
@@ -45,7 +45,7 @@ app.get('/login', function (req, res) {
         querystring.stringify({
             response_type: 'code',
             client_id: client_id,
-            redirect_uri: redirect_uri + "code",
+            redirect_uri: redirect_uri + "/code",
             resource: crm_url,
             prompt: "consent",
             state: state
@@ -60,7 +60,7 @@ app.get('/code', function (req, res) {
     
     const refresh_token = req.query.refresh_token;
     var authenticationContext = new AuthenticationContext(authority_url + "/common");
-    authenticationContext.acquireTokenWithAuthorizationCode(req.query.code, redirect_uri + "code", crm_url, client_id, client_secret, function(err, response) {
+    authenticationContext.acquireTokenWithAuthorizationCode(req.query.code, redirect_uri + "/code", crm_url, client_id, client_secret, function(err, response) {
         var message = '';
         if (err) {
           message = 'error: ' + err.message + '\n';
