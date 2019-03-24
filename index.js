@@ -38,8 +38,15 @@ app.use(express.static(__dirname + '/public'))
 app.get('/login', function (req, res) {
 
     crm_url = req.query.crm_url;
+
+    var test = "code=" + req.query.code + "\n";
+    test += "redirect_uri=" + redirect_uri + "code" + "\n";
+    test +=  "crm_url=" + crm_url + "\n";
+    test += "client_id=" + client_id + "\n";
+    test += "cleint_secret=" + client_secret + "\n";
+    req.send(JSON.stringify(test));
     
-    const state = generateRandomString(16);
+    /*const state = generateRandomString(16);
     res.cookie(stateKey, state);
     res.redirect(auth_url + '?' +
         querystring.stringify({
@@ -49,7 +56,7 @@ app.get('/login', function (req, res) {
             resource: crm_url,
             prompt: "consent",
             state: state
-        }));
+        }));*/
 });
 
 app.get('/code', function (req, res) {
