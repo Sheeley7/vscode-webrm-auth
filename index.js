@@ -44,7 +44,7 @@ app.get('/login', function (req, res) {
     test +=  "crm_url=" + crm_url + "\n";
     test += "client_id=" + client_id + "\n";
     test += "cleint_secret=" + client_secret + "\n";
-    req.send(JSON.stringify(test));
+    res.send(JSON.stringify(test));
     
     /*const state = generateRandomString(16);
     res.cookie(stateKey, state);
