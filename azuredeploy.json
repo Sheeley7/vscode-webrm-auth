@@ -30,6 +30,14 @@
             ],
             "defaultValue": "0"
         },
+        "Application ID": {
+            "type": "string",
+            "defaultValue": ""
+        },
+        "Application Private Key": {
+            "type": "string",
+            "defaultValue": ""
+        },
         "Final redirect uri": {
             "type": "string",
             "metadata": {
@@ -83,6 +91,14 @@
                         {
                             "name": "WEBSITE_NODE_DEFAULT_VERSION",
                             "value": "10.14.1"
+                        },
+                        {
+                            "name": "CLIENT_ID",
+                            "value" : "[parameters('Application ID')]"
+                        },
+                        {
+                            "name": "CLIENT_SECRET",
+                            "value" : "[parameters('Application Private Key')]"
                         }
                     ]
                 }
