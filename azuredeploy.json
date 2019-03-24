@@ -32,11 +32,17 @@
         },
         "Application ID": {
             "type": "string",
-            "defaultValue": ""
+            "defaultValue": "",
+            "metadata" : {
+                "description": "Application ID"
+            }
         },
         "Application Private Key": {
             "type": "string",
-            "defaultValue": ""
+            "defaultValue": "",
+            "metadata" : {
+                "description": "Application Private Key"
+            }
         },
         "Final redirect uri": {
             "type": "string",
