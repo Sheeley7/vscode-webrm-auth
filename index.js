@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const client_id = process.env.SPOTIFY_CLIENT_ID;
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
-const redirect_uri = process.env.SPOTIFY_REDIRECT_URI;
+const redirect_uri = "https://wrm-test1.azurewebsites.net/"//process.env.SPOTIFY_REDIRECT_URI;
 const final_redirect_uri = process.env.FINAL_REDIRECT_URI;
 
 /**
