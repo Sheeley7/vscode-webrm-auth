@@ -55,8 +55,8 @@ app.get('/login', function (req, res) {
 app.get('/code', function (req, res) {
   
     const code = req.query.code || null;
-    
-    var test = "code=" + req.query.code + "\n";
+    req.send(code);
+    /*var test = "code=" + req.query.code + "\n";
     test += "redirect_uri=" + redirect_uri + "code" + "\n";
     test +=  "crm_url=" + crm_url + "\n";
     test += "client_id=" + client_id + "\n";
@@ -73,8 +73,6 @@ app.get('/code', function (req, res) {
         req.send(message);
     });*/
 });
-
-
 
 app.listen(process.env.PORT || 3000);
 
