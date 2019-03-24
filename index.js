@@ -5,8 +5,8 @@ const cookieParser = require('cookie-parser');
 const AuthenticationContext = require('adal-node').AuthenticationContext;
 require('dotenv').config();
 
-const client_id = process.env.SPOTIFY_CLIENT_ID;
-const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
+const client_id = process.env.CLIENT_ID;
+const client_secret = process.env.CLIENT_SECRET;
 const redirect_uri = "https://wrm-test1.azurewebsites.net/"//process.env.SPOTIFY_REDIRECT_URI;
 const final_redirect_uri = process.env.FINAL_REDIRECT_URI;
 const crm_url;
@@ -26,7 +26,7 @@ const generateRandomString = function (length) {
     return text;
 };
 
-const stateKey = 'spotify_auth_state';
+const stateKey = 'dynamics_auth_state';
 
 const app = express();
 
