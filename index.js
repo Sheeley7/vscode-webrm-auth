@@ -9,6 +9,8 @@ const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
 const redirect_uri = "https://wrm-test1.azurewebsites.net/";//process.env.SPOTIFY_REDIRECT_URI;
 const final_redirect_uri = process.env.FINAL_REDIRECT_URI;
+const authority_url = "https://login.windows.net";
+const auth_url = authority_url + "/common/oauth2/authorize";
 var crm_url;
 
 /**
@@ -36,99 +38,37 @@ app.use(express.static(__dirname + '/public'))
 app.get('/login', function (req, res) {
 
     crm_url = req.query.crm_url;
-
+    
     const state = generateRandomString(16);
     res.cookie(stateKey, state);
-    /*
-    res.redirect('https://login.windows.net/common/oauth2/authorize?' +
+    res.redirect(auth_url + '?' +
         querystring.stringify({
             response_type: 'code',
-            client_id: "64fb057e-3c0b-4fb0-8ac9-f710e529178b",
-            redirect_uri: "https://webresourcemanagerauth.azurewebsites.net/callback",
-            resource: "https://sheel7.api.crm.dynamics.com",
+            client_id: client_id,
+            redirect_uri: redirect_uri + "code",
+            resource: crm_url,
             prompt: "consent",
             state: state
-        }));*/
+        }));
     res.send(client_id + "\n" + crm_url);
-    
 });
 
-app.get('/callback', function (req, res) {
-    var crmURL = "https://sheel7.crm.dynamics.com";
-    var clientId = "64fb057e-3c0b-4fb0-8ac9-f710e529178b";
-    var authority = "https://login.windows.net/common";
-    var clientSecret = 'eBSLWujg5gODpD8rkp+h554Av498Uy5gwkK9NouS2no='
-    
-    var authorityHostUrl = 'https://login.windows.net';
-    var tenant = 'common';
-    var authorityUrl = authorityHostUrl + '/' + tenant;
-    var redirectUri = 'https://webresourcemanagerauth.azurewebsites.net/callback';
-    var resource = 'https://sheel7.api.crm.dynamics.com';
-    // your application requests refresh and access tokens
-    // after checking the state parameter
-
+app.get('/code', function (req, res) {
+  
     const code = req.query.code || null;
     const state = req.query.state || null;
     const storedState = req.cookies ? req.cookies[stateKey] : null;
     
-    // requesting access token from refresh token
     const refresh_token = req.query.refresh_token;
-    var authenticationContext = new AuthenticationContext(authorityUrl);
-    authenticationContext.acquireTokenWithAuthorizationCode(req.query.code, redirectUri, resource, clientId, clientSecret, function(err, response) {
+    var authenticationContext = new AuthenticationContext(authority_url + "/common");
+    authenticationContext.acquireTokenWithAuthorizationCode(req.query.code, redirect_uri + "code", crm_url, client_id, client_secret, function(err, response) {
         var message = '';
         if (err) {
           message = 'error: ' + err.message + '\n';
         }
         message += 'response: ' + JSON.stringify(response);
-
-        var headers = {
-            "Accept": "application/json",
-            "OData-MaxVersion": "4.0",
-            "OData-Version": "4.0",
-            "Authorization": "Bearer " + response.accessToken
-        };
-        var options = {
-            url: "https://sheel7.api.crm.dynamics.com/api/data/v9.1/accounts",
-            method: "GET",
-            headers: headers,
-            qs: {"$select": "name"}
-        };
-        request(options, function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                // Print out the response body
-                res.send(JSON.stringify(response));
-            }
-            else {
-                res.send("BAD " + JSON.stringify(response) + JSON.stringify(error));
-            }
-        });
-        
     });    
 });
 
-app.get('/result', function (req, res) {
-
-    var headers = {
-        "Accept": "application/json",
-        "OData-MaxVersion": "4.0",
-        "OData-Version": "4.0",
-        "Authorization": "Bearer " + req.query.token
-    };
-    var options = {
-        url: "https://sheel7.crm.dynamics.com/api/data/v9.1/accounts",
-        method: "GET",
-        headers: headers,
-        qs: {"$select": "name"}
-    };
-    request(options, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            // Print out the response body
-            res.send("GOOD TO GO");
-        }
-        else {
-            res.send("BAD " + response.statusCode);
-        }
-    });
-});
 
 app.listen(process.env.PORT || 3000);
