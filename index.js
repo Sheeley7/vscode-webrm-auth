@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
-const redirect_uri = "https://wrm-test1.azurewebsites.net/"//process.env.SPOTIFY_REDIRECT_URI;
+const redirect_uri = "https://wrm-test1.azurewebsites.net/";//process.env.SPOTIFY_REDIRECT_URI;
 const final_redirect_uri = process.env.FINAL_REDIRECT_URI;
 var crm_url;
 
@@ -35,7 +35,7 @@ app.use(express.static(__dirname + '/public'))
 
 app.get('/login', function (req, res) {
 
-    //crm_url = req.query.crm_url;
+    crm_url = req.query.crm_url;
 
     const state = generateRandomString(16);
     res.cookie(stateKey, state);
@@ -49,7 +49,7 @@ app.get('/login', function (req, res) {
             prompt: "consent",
             state: state
         }));*/
-    res.send(client_id + "\n");
+    res.send(client_id + "\n" + crm_url);
     
 });
 
