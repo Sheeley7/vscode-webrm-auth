@@ -42,14 +42,14 @@ app.get('/login', function (req, res) {
             response_type: 'code',
             client_id: "64fb057e-3c0b-4fb0-8ac9-f710e529178b",
             redirect_uri: "https://webresourcemanagerauth.azurewebsites.net/callback",
-            resource: "https://{crm_org}.api.crm.dynamics.com",
+            resource: "https://sheel7.api.crm.dynamics.com",
             prompt: "consent",
             state: state
         })); 
 });
 
 app.get('/callback', function (req, res) {
-    var crmURL = "https://{crm_org}.crm.dynamics.com";
+    var crmURL = "https://sheel7.crm.dynamics.com";
     var clientId = "64fb057e-3c0b-4fb0-8ac9-f710e529178b";
     var authority = "https://login.windows.net/common";
     var clientSecret = 'eBSLWujg5gODpD8rkp+h554Av498Uy5gwkK9NouS2no='
@@ -58,7 +58,7 @@ app.get('/callback', function (req, res) {
     var tenant = 'common';
     var authorityUrl = authorityHostUrl + '/' + tenant;
     var redirectUri = 'https://webresourcemanagerauth.azurewebsites.net/callback';
-    var resource = 'https://{crm_org}.api.crm.dynamics.com';
+    var resource = 'https://sheel7.api.crm.dynamics.com';
     // your application requests refresh and access tokens
     // after checking the state parameter
 
@@ -83,7 +83,7 @@ app.get('/callback', function (req, res) {
             "Authorization": "Bearer " + response.accessToken
         };
         var options = {
-            url: "https://{crm_org}.api.crm.dynamics.com/api/data/v9.1/accounts",
+            url: "https://sheel7.api.crm.dynamics.com/api/data/v9.1/accounts",
             method: "GET",
             headers: headers,
             qs: {"$select": "name"}
@@ -110,7 +110,7 @@ app.get('/result', function (req, res) {
         "Authorization": "Bearer " + req.query.token
     };
     var options = {
-        url: "https://{crm_org}.crm.dynamics.com/api/data/v9.1/accounts",
+        url: "https://sheel7.crm.dynamics.com/api/data/v9.1/accounts",
         method: "GET",
         headers: headers,
         qs: {"$select": "name"}
