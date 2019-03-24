@@ -30,13 +30,6 @@
             ],
             "defaultValue": "0"
         },
-        "Final redirect uri": {
-            "type": "string",
-            "metadata": {
-                "description": "Final redirect uri."
-            },
-            "defaultValue": "http://localhost:8350/result"
-        },
         "repoUrl": {
             "type": "string"
         },
@@ -57,6 +50,20 @@
                 "description": "Application Private Key"
             }
         },
+        "Auth redirect uri": {
+            "type": "string",
+            "metadata": {
+                "description": "Redirect uri."
+            },
+            "defaultValue": ""
+        },
+        "Application redirect uri": {
+            "type": "string",
+            "metadata": {
+                "description": "Final redirect uri."
+            },
+            "defaultValue": "http://localhost:8350/result"
+        }
     },
     "resources": [
         {
@@ -87,12 +94,12 @@
                     "webSocketsEnabled": true,
                     "appSettings": [
                         {
-                            "name": "websiteUrl",
-                            "value": ""
+                            "name": "REDIRECT_URI",
+                            "value": "[parameters('Auth redirect uri')]"
                         },
                         {
                             "name": "FINAL_REDIRECT_URI",
-                            "value": "[parameters('Final redirect uri')]"
+                            "value": "[parameters('Application redirect uri')]"
                         },
                         {
                             "name": "WEBSITE_NODE_DEFAULT_VERSION",
