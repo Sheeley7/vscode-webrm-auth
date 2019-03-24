@@ -43,14 +43,14 @@
         "branch": {
             "type": "string"
         },
-        "Application ID": {
+        "App Registration - Application ID": {
             "type": "string",
             "defaultValue": "",
             "metadata" : {
                 "description": "Application ID"
             }
         },
-        "Application Private Key": {
+        "App Registration - Application Private Key": {
             "type": "string",
             "defaultValue": "",
             "metadata" : {
@@ -100,11 +100,11 @@
                         },
                         {
                             "name": "CLIENT_ID",
-                            "value" : "[parameters('Application ID')]"
+                            "value" : "[parameters('App Registration - Application ID')]"
                         },
                         {
                             "name": "CLIENT_SECRET",
-                            "value" : "[parameters('Application Private Key')]"
+                            "value" : "[parameters('App Registration - Application Private Key')]"
                         }
                     ]
                 }
