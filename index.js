@@ -9,6 +9,7 @@ const client_id = process.env.SPOTIFY_CLIENT_ID;
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const redirect_uri = "https://wrm-test1.azurewebsites.net/"//process.env.SPOTIFY_REDIRECT_URI;
 const final_redirect_uri = process.env.FINAL_REDIRECT_URI;
+const crm_url;
 
 /**
  * Generates a random string
@@ -34,9 +35,11 @@ app.use(express.static(__dirname + '/public'))
 
 app.get('/login', function (req, res) {
 
+    crm_url = req.query.crm_url;
+
     const state = generateRandomString(16);
     res.cookie(stateKey, state);
-    
+    /*
     res.redirect('https://login.windows.net/common/oauth2/authorize?' +
         querystring.stringify({
             response_type: 'code',
@@ -45,7 +48,9 @@ app.get('/login', function (req, res) {
             resource: "https://sheel7.api.crm.dynamics.com",
             prompt: "consent",
             state: state
-        })); 
+        }));*/
+    res.send(client_id + "\n" + crm_url);
+    
 });
 
 app.get('/callback', function (req, res) {
