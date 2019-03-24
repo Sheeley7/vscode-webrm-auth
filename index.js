@@ -66,6 +66,7 @@ app.get('/code', function (req, res) {
           message = 'error: ' + err.message + '\n';
         }
         message += 'response: ' + JSON.stringify(response);
+        req.send(message);
     });    
 });
 
