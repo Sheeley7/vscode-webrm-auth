@@ -50,7 +50,6 @@ app.get('/login', function (req, res) {
             prompt: "consent",
             state: state
         }));
-    res.send(client_id + "\n" + crm_url);
 });
 
 app.get('/code', function (req, res) {
@@ -72,3 +71,4 @@ app.get('/code', function (req, res) {
 
 
 app.listen(process.env.PORT || 3000);
+
