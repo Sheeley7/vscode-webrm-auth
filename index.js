@@ -81,7 +81,7 @@ app.get('/refresh_token', function (req, res) {
     crm_url = req.query.crm_url;
     var refresh_token = req.query.refresh_token;
     var authenticationContext = new AuthenticationContext(authority_url + "/common"); 
-    authenticationContext.acquireTokenWithRefreshToken(refresh_token, client_id, "", crm_url, function(refreshErr, refreshResponse) { 
+    authenticationContext.acquireTokenWithRefreshToken(refresh_token, client_id, client_secret, crm_url, function(refreshErr, refreshResponse) { 
         if (refreshErr) { 
             var message = 'refreshError: ' + refreshErr.message; 
             res.send(message);  
