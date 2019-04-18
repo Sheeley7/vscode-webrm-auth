@@ -60,11 +60,10 @@ app.get('/code', function (req, res) {
     
     const refresh_token = req.query.refresh_token;
     var authenticationContext = new AuthenticationContext(authority_url + "/common");
-    authenticationContext.acquireTokenWithAuthorizationCode(req.query.code, redirect_uri + "/code", crm_url, client_id, null, function(err, response) {
+    authenticationContext.acquireTokenWithAuthorizationCode(req.query.code, redirect_uri + "/code", crm_url, client_id, client_secret, function(err, response) {
         var message = '';
         if (err) {
           message = 'error: ' + err.message + '\n';
-          res.send(message);
         }
         message += 'response: ' + JSON.stringify(response);
 
