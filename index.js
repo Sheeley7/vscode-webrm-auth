@@ -60,7 +60,7 @@ app.get('/code', function (req, res) {
     
     const refresh_token = req.query.refresh_token;
     var authenticationContext = new AuthenticationContext(authority_url + "/common");
-    authenticationContext.acquireTokenWithAuthorizationCode(req.query.code, redirect_uri + "/code", crm_url, client_id, client_secret, function(err, response) {
+    authenticationContext.acquireTokenWithAuthorizationCode(req.query.code, redirect_uri + "/code", crm_url, client_id, null, function(err, response) {
         var message = '';
         if (err) {
           message = 'error: ' + err.message + '\n';
@@ -75,6 +75,26 @@ app.get('/code', function (req, res) {
                 expires_on: response.expiresOn
             }));
     });    
+});
+
+app.get('/refresh_token', function (req, res) {
+    crm_url = req.query.crm_url;
+    var authenticationContext = new AuthenticationContext(authority_url + "/common"); 
+    authenticationContext.acquireTokenWithRefreshToken(req.session.authInfo.refreshToken, client_id, client_secret, crm_url, function(refreshErr, refreshResponse) { 
+        /*if (refreshErr) { 
+            var message = 'refreshError: ' + refreshErr.message; 
+            res.send(message);  
+            return; 
+        } 
+        refreshResponse.requestOn = Date.now(); 
+        //set token to session 
+        req.session.authInfo = refreshResponse; 
+        //do the action 
+        if(action){ 
+            action(); 
+        }*/
+    });  
+   
 });
 
 
