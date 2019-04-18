@@ -81,18 +81,13 @@ app.get('/refresh_token', function (req, res) {
     crm_url = req.query.crm_url;
     var authenticationContext = new AuthenticationContext(authority_url + "/common"); 
     authenticationContext.acquireTokenWithRefreshToken(req.session.authInfo.refreshToken, client_id, client_secret, crm_url, function(refreshErr, refreshResponse) { 
-        /*if (refreshErr) { 
+        if (refreshErr) { 
             var message = 'refreshError: ' + refreshErr.message; 
             res.send(message);  
             return; 
-        } 
-        refreshResponse.requestOn = Date.now(); 
-        //set token to session 
-        req.session.authInfo = refreshResponse; 
-        //do the action 
-        if(action){ 
-            action(); 
-        }*/
+        }
+        res.send(refreshResponse);
+      
     });  
    
 });
