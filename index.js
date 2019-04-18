@@ -64,6 +64,7 @@ app.get('/code', function (req, res) {
         var message = '';
         if (err) {
           message = 'error: ' + err.message + '\n';
+          res.send(message);
         }
         message += 'response: ' + JSON.stringify(response);
 
