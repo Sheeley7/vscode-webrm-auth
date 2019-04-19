@@ -82,14 +82,14 @@ app.get('/refresh_token', function (req, res) {
     var refresh_token = req.query.refresh_token;
     var authenticationContext = new AuthenticationContext(authority_url + "/common"); 
     authenticationContext.acquireTokenWithRefreshToken(refresh_token, client_id, client_secret, crm_url, function(refreshErr, refreshResponse) { 
-        if (refreshErr) {
-            var err = {};
-            err["error"] =  refreshErr.error;
-            err["error_description"] = refreshErr.error_description;
-            res.send(err); 
-            return; 
+        if (refreshErr) { 
+            var message = 'refreshError: ' + refreshErr.message; 
+            res.status(400).send(message);
         }
-        res.send(refreshResponse);
+        else {
+            res.send(refreshResponse);
+        }
+        
       
     });  
    
