@@ -20,7 +20,7 @@ var crm_url;
  */
 const generateRandomString = function (length) {
     let text = '';
-    const possible = 'tommarvoloriddle';
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
     for (let i = 0; i < length; i++) {
         text += possible.charAt(Math.floor(Math.random() * possible.length));
@@ -28,6 +28,7 @@ const generateRandomString = function (length) {
     return text;
 };
 
+//Cookie state key
 const stateKey = 'dynamics_auth_state';
 
 const app = express();
@@ -35,8 +36,8 @@ const app = express();
 app.use(express.static(__dirname + '/public'))
     .use(cookieParser());
 
+//Main login endpoint
 app.get('/login', function (req, res) {
-
     crm_url = req.query.crm_url;
     
     const state = generateRandomString(16);
@@ -52,31 +53,44 @@ app.get('/login', function (req, res) {
         }));
 });
 
+//Callback after user has logged in via the web browser
 app.get('/code', function (req, res) {
   
     const code = req.query.code || null;
     const state = req.query.state || null;
     const storedState = req.cookies ? req.cookies[stateKey] : null;
     
-    const refresh_token = req.query.refresh_token;
-    var authenticationContext = new AuthenticationContext(authority_url + "/common");
-    authenticationContext.acquireTokenWithAuthorizationCode(req.query.code, redirect_uri + "/code", crm_url, client_id, client_secret, function(err, response) {
-        var message = '';
-        if (err) {
-          message = 'error: ' + err.message + '\n';
-        }
-        message += 'response: ' + JSON.stringify(response);
-
+    //If the states mismatch, throw an error
+    if(state === null || state !== storedState) {
+        console.error('state_mismatch', state, storedState);
         res.redirect(final_redirect_uri + '?' +
             querystring.stringify({
-                access_token: response.accessToken,
-                refresh_token: response.refreshToken,
-                expires_in: response.expiresIn,
-                expires_on: response.expiresOn
+                error: 'state_mismatch'
             }));
-    });    
+    }
+    //Otherwise clear the cookie and request the auth tokens
+    else {
+        res.clearCookie(stateKey);
+        var authenticationContext = new AuthenticationContext(authority_url + "/common");
+        authenticationContext.acquireTokenWithAuthorizationCode(req.query.code, redirect_uri + "/code", crm_url, client_id, client_secret, function(err, response) {
+            var message = '';
+            if (err) {
+            message = 'error: ' + err.message + '\n';
+            }
+            message += 'response: ' + JSON.stringify(response);
+
+            res.redirect(final_redirect_uri + '?' +
+                querystring.stringify({
+                    access_token: response.accessToken,
+                    refresh_token: response.refreshToken,
+                    expires_in: response.expiresIn,
+                    expires_on: response.expiresOn
+                }));
+        }); 
+    }  
 });
 
+//Endpoint for requesting an access token directly from a refresh token
 app.get('/refresh_token', function (req, res) {
     crm_url = req.query.crm_url;
     var refresh_token = req.query.refresh_token;
@@ -88,8 +102,7 @@ app.get('/refresh_token', function (req, res) {
         else {
             res.send(refreshResponse);
         }
-    });  
-   
+    }); 
 });
 
 
