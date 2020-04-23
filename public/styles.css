@@ -18,7 +18,7 @@ a img {
     color: #fff;
 }
 
-.vscode-spotify-mobile-title {
+.vscode-webrm-mobile-title {
     display: none !important;
 }
 
@@ -36,66 +36,25 @@ a img {
   }
 }
 
-.vscode-spotify-title:hover {
-    background-color: #757575;
-}
-
-.vscode-spotify-title:hover .vscode-spotify-logo-gramophone {
-    display: block;
-    animation: gramophone 0.8s linear infinite;
-}
-
-.vscode-spotify-logo-gramophone {
-    display: none;
-    position: absolute;
-    height: 2px;
-    width: 35%;
-    background-color: black;
-    top: 80%;
-    left: 55%;
-    transform-origin: bottom right;
-    transform: rotate(20deg);
-    z-index: 1;
-}
-
-
-.vscode-spotify-logo-image {
+.vscode-webrm-logo-image {
     height: 48px;
     width: 48px;
 }
-
-@keyframes rotating {
-  from{
-      transform: rotate(0deg);
-  }
-  to{
-      transform: rotate(360deg);
-  }
-}
-
-.vscode-spotify-navigation-login {
-    display: none;
-}
-
-.vscode-spotify-logo-image {
+.vscode-webrm-logo-image {
     border-radius: 50%;
 }
-.vscode-spotify-logo-image:hover {
-    animation: rotating 0.8s linear infinite;
-}
-
-.vscode-spotify-header {
+.vscode-webrm-header {
     overflow: visible;
     background-color: white;
 }
 
-.vscode-spotify-header .mdl-navigation__link {
+.vscode-webrm-header .mdl-navigation__link {
     color: #757575;
     font-weight: 700;
     font-size: 14px;
 }
 
-.vscode-spotify-navigation-container {
+.vscode-webrm-navigation-container {
     /* Simple hack to make the overflow happen to the left instead... */
     direction: rtl;
     -webkit-order: 1;
@@ -106,7 +65,7 @@ a img {
     width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.vscode-spotify-navigation {
+.vscode-webrm-navigation {
     /* ... and now make sure the content is actually LTR */
     direction: ltr;
     -webkit-justify-content: flex-end;
@@ -115,12 +74,12 @@ a img {
     width: 800px;
 }
 
-.vscode-spotify-search-box.is-focused + .vscode-spotify-navigation-container {
+.vscode-webrm-search-box.is-focused + .vscode-webrm-navigation-container {
     opacity: 0;
     width: 100px;
 }
 
-.vscode-spotify-navigation .mdl-navigation__link {
+.vscode-webrm-navigation .mdl-navigation__link {
     display: inline-block;
     height: 60px;
     line-height: 68px;
@@ -128,31 +87,31 @@ a img {
     border-bottom: 4px solid transparent;
 }
 
-.vscode-spotify-navigation .mdl-navigation__link:hover {
+.vscode-webrm-navigation .mdl-navigation__link:hover {
     border-bottom: 4px solid #8bc34a;
 }
 
-.vscode-spotify-drawer .mdl-navigation__link.mdl-navigation__link {
+.vscode-webrm-drawer .mdl-navigation__link.mdl-navigation__link {
     font-size: 14px;
     color: #757575;
 }
 
-.vscode-spotify-drawer span.mdl-navigation__link.mdl-navigation__link {
+.vscode-webrm-drawer span.mdl-navigation__link.mdl-navigation__link {
     color: #8bc34a;
 }
 
-.vscode-spotify-drawer .vscode-spotify-logo-image {
+.vscode-webrm-drawer .vscode-webrm-logo-image {
     position: absolute;
     bottom: 16px;
 }
 
-.vscode-spotify-content{
+.vscode-webrm-content{
     display: flex;
     flex-direction: column;
     flex: 1;
 }
 
-.vscode-spotify-main-section {
+.vscode-webrm-main-section {
     position: relative;
     height: 800px;
     width: auto;
@@ -167,54 +126,54 @@ a img {
     font-weight: 500;
 }
 
-.vscode-spotify-slogan {
+.vscode-webrm-slogan {
     font-size: 60px;
     padding-top: 160px;
 }
 
-.vscode-spotify-sub-slogan {
+.vscode-webrm-sub-slogan {
     font-size: 21px;
     padding-top: 24px;
 }
 
-.vscode-spotify-create-character a {
+.vscode-webrm-create-character a {
     text-decoration: none;
     color: #767777;
     font-weight: 300;
 }
 
-.vscode-spotify-wear-band-text p {
+.vscode-webrm-wear-band-text p {
     padding-top: 8px;
 }
 
-.vscode-spotify-customized-section-text p {
+.vscode-webrm-customized-section-text p {
     padding-top: 16px;
 }
 
-.vscode-spotify-card-container .mdl-card__media img {
+.vscode-webrm-card-container .mdl-card__media img {
     width: 100%;
 }
 
-.vscode-spotify-card-container .mdl-card__actions a {
+.vscode-webrm-card-container .mdl-card__actions a {
     border-top: none;
     font-size: 16px;
 }
 
-.vscode-spotify-footer a:hover {
+.vscode-webrm-footer a:hover {
     color: #8bc34a;
 }
 
-.vscode-spotify-footer .mdl-mega-footer--bottom-section a {
+.vscode-webrm-footer .mdl-mega-footer--bottom-section a {
     margin-right: 2em;
 }
 
 /**** Mobile layout ****/
 @media (max-width: 900px) {
-    .vscode-spotify-title {
+    .vscode-webrm-title {
         display: none !important;
     }
 
-    .vscode-spotify-mobile-title {
+    .vscode-webrm-mobile-title {
         display: block !important;
         position: absolute;
         transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -223,28 +182,28 @@ a img {
     /* WebViews in iOS 9 break the "~" operator, and WebViews in OS X 10.10 break
        consecutive "+" operators in some cases. Therefore, we need to use both
        here to cover all the bases. */
-    .vscode-spotify.vscode-spotify-search-box.is-focused ~ .vscode-spotify-mobile-title,
-    .vscode-spotify-search-box.is-focused + .vscode-spotify-navigation-container + .vscode-spotify-mobile-title {
+    .vscode-webrm.vscode-webrm-search-box.is-focused ~ .vscode-webrm-mobile-title,
+    .vscode-webrm-search-box.is-focused + .vscode-webrm-navigation-container + .vscode-webrm-mobile-title {
         opacity: 0;
     }
 
-    .vscode-spotify-main-section {
+    .vscode-webrm-main-section {
         height: 350px;
     }
 
-    .vscode-spotify-slogan {
+    .vscode-webrm-slogan {
         font-size: 26px;
         margin: 0 16px;
         padding-top: 24px;
     }
 
-    .vscode-spotify-sub-slogan {
+    .vscode-webrm-sub-slogan {
         font-size: 16px;
         margin: 0 16px;
         padding-top: 8px;
     }
 
-    .vscode-spotify-create-character img {
+    .vscode-webrm-create-character img {
         height: 12px;
     }
 
