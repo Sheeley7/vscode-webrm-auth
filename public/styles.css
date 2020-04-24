@@ -1,0 +1,195 @@
+body {
+    margin: 0;
+    background: #f3f3f3;
+}
+
+/* Disable ugly boxes around images in IE10 */
+a img {
+    border: 0px;
+}
+
+::-moz-selection {
+    background-color: #6ab344;
+    color: #fff;
+}
+
+::selection {
+    background-color: #6ab344;
+    color: #fff;
+}
+
+.vscode-webrm-mobile-title {
+    display: none !important;
+}
+.vscode-webrm-logo-image {
+    height: 48px;
+    width: 48px;
+}
+.vscode-webrm-logo-image {
+    border-radius: 50%;
+}
+.vscode-webrm-header {
+    overflow: visible;
+    background-color: white;
+}
+
+.vscode-webrm-header .mdl-navigation__link {
+    color: #757575;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.vscode-webrm-navigation-container {
+    /* Simple hack to make the overflow happen to the left instead... */
+    direction: rtl;
+    -webkit-order: 1;
+    -ms-flex-order: 1;
+    order: 1;
+    width: 10px;
+    transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.vscode-webrm-navigation {
+    /* ... and now make sure the content is actually LTR */
+    direction: ltr;
+    -webkit-justify-content: flex-end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    width: 800px;
+}
+
+.vscode-webrm-search-box.is-focused + .vscode-webrm-navigation-container {
+    opacity: 0;
+    width: 100px;
+}
+
+.vscode-webrm-navigation .mdl-navigation__link {
+    display: inline-block;
+    height: 60px;
+    line-height: 68px;
+    background-color: transparent !important;
+    border-bottom: 4px solid transparent;
+}
+
+.vscode-webrm-navigation .mdl-navigation__link:hover {
+    border-bottom: 4px solid #8bc34a;
+}
+
+.vscode-webrm-drawer .mdl-navigation__link.mdl-navigation__link {
+    font-size: 14px;
+    color: #757575;
+}
+
+.vscode-webrm-drawer span.mdl-navigation__link.mdl-navigation__link {
+    color: #8bc34a;
+}
+
+.vscode-webrm-drawer .vscode-webrm-logo-image {
+    position: absolute;
+    bottom: 16px;
+}
+
+.vscode-webrm-content{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.vscode-webrm-main-section {
+    position: relative;
+    height: 800px;
+    width: auto;
+    background: #f3f3f3 url('images/background.png') no-repeat center 30%;
+    background-size: contain;
+}
+
+.logo-font {
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    line-height: 1;
+    color: #767777;
+    font-weight: 500;
+}
+
+.vscode-webrm-slogan {
+    font-size: 60px;
+    padding-top: 160px;
+}
+
+.vscode-webrm-sub-slogan {
+    font-size: 21px;
+    padding-top: 24px;
+}
+
+.vscode-webrm-create-character a {
+    text-decoration: none;
+    color: #767777;
+    font-weight: 300;
+}
+
+.vscode-webrm-wear-band-text p {
+    padding-top: 8px;
+}
+
+.vscode-webrm-customized-section-text p {
+    padding-top: 16px;
+}
+
+.vscode-webrm-card-container .mdl-card__media img {
+    width: 100%;
+}
+
+.vscode-webrm-card-container .mdl-card__actions a {
+    border-top: none;
+    font-size: 16px;
+}
+
+.vscode-webrm-footer a:hover {
+    color: #8bc34a;
+}
+
+.vscode-webrm-footer .mdl-mega-footer--bottom-section a {
+    margin-right: 2em;
+}
+
+/**** Mobile layout ****/
+@media (max-width: 900px) {
+    .vscode-webrm-title {
+        display: none !important;
+    }
+
+    .vscode-webrm-mobile-title {
+        display: block !important;
+        position: absolute;
+        transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* WebViews in iOS 9 break the "~" operator, and WebViews in OS X 10.10 break
+       consecutive "+" operators in some cases. Therefore, we need to use both
+       here to cover all the bases. */
+    .vscode-webrm.vscode-webrm-search-box.is-focused ~ .vscode-webrm-mobile-title,
+    .vscode-webrm-search-box.is-focused + .vscode-webrm-navigation-container + .vscode-webrm-mobile-title {
+        opacity: 0;
+    }
+
+    .vscode-webrm-main-section {
+        height: 350px;
+    }
+
+    .vscode-webrm-slogan {
+        font-size: 26px;
+        margin: 0 16px;
+        padding-top: 24px;
+    }
+
+    .vscode-webrm-sub-slogan {
+        font-size: 16px;
+        margin: 0 16px;
+        padding-top: 8px;
+    }
+
+    .vscode-webrm-create-character img {
+        height: 12px;
+    }
+
+}
