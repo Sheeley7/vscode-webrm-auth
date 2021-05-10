@@ -1,4 +1,4 @@
-# vscode-webrm-auth [![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
+# vscode-webrm-auth [![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://aka.ms/deploytoazurebutton)
 Auth server for vscode-webrm
 
 # Directions
